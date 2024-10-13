@@ -23,13 +23,13 @@ services:
       - brackets
 
   db:
-    image: mysql
+    image: mariadb
     restart: always
     ports:
       - "5432:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: 12345
-      MYSQL_DATABASE: 'aspro'
+      MARIADB_ROOT_PASSWORD: 12345
+      MARIADB_DATABASE: 'aspro'
     networks:
       - brackets
 

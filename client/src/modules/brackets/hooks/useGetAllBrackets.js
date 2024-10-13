@@ -1,5 +1,5 @@
 import {onMounted, ref} from "vue";
-import {ApiUrl} from "../../../../shared/constants/API_URL.js";
+import {ApiUrl} from "../../../shared/constants/API_URL.js";
 
 export function useGetAllBrackets() {
     const data = ref([]);

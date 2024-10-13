@@ -1,14 +1,9 @@
 <script setup>
-
-import GetAllBrackets from "../features/bracket/get-all/ui/GetAllBrackets.vue";
-import CreateBracketForm from "../features/bracket/create/ui/createBracketForm.vue";
+import Brackets from "../modules/brackets/brackets.vue";
 </script>
 
 <template>
-  <div class="d-flex container justify-content-between">
-    <GetAllBrackets/>
-    <CreateBracketForm/>
-  </div>
+  <Brackets/>
 </template>
 
 <style scoped>

@@ -1,11 +1,21 @@
 import {ref} from "vue";
-import {ApiUrl} from "../../../../shared/constants/API_URL.js";
+import {ApiUrl} from "../../../shared/constants/API_URL.js";
 
 export default function useCreateBracket() {
+    const bracket = ref({
+        string: '',
+        success: false
+    });
     const isLoading = ref(false);
     const error = ref('');
 
     async function createBracket(data) {
+
+        if (!data.string) {
+            error.value = "Поле не может быть пустым"
+            return;
+        }
+
         isLoading.value = true;
         try {
             const res = await fetch(`${ApiUrl}/brackets`, {
@@ -17,9 +27,11 @@ export default function useCreateBracket() {
             })
 
             if (res.ok) {
-                console.log('asdasdasdd')
+                const success = await res.json();
+                bracket.value.success = success.success;
+                bracket.value.string = data.string;
             } else {
-                console.log("Что то пошо не так");
+                error.value = (await res.json()).message;
             }
         } catch (e) {
             error.value = e;
@@ -30,6 +42,7 @@ export default function useCreateBracket() {
     }
 
     return {
+        data: bracket,
         isLoading,
         error,
         createBracket

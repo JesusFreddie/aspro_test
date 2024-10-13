@@ -1,13 +1,19 @@
 <script setup>
-import useCreateBracket from "../model/useCreateBracket.js";
-import { ref } from "vue";
+
+import {ref} from "vue";
+import useCreateBracket from "../hooks/useCreateBracket.js";
+
+const emit = defineEmits(['createBracket'])
 
 const bracketData = ref({ string: '' });
-const { isLoading, error, createBracket } = useCreateBracket();
+const { isLoading, error, createBracket, data } = useCreateBracket();
 
-function handleSubmit() {
-  createBracket({ string: bracketData.value.string });
-  bracketData.value.string = ''; // Очищаем поле после отправки
+async function handleSubmit() {
+  await createBracket({ string: bracketData.value.string });
+  if (data.value.string) {
+    emit('createBracket', data.value)
+  }
+  bracketData.value.string = '';
 }
 </script>
 
