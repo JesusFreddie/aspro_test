@@ -7,6 +7,7 @@ export function useGetAllBrackets() {
     const error = ref('');
 
     onMounted(() => {
+        error.value = '';
         isLoading.value = true;
         fetch(`${ApiUrl}/brackets`)
             .then(res => res.json())
